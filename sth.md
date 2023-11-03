@@ -78,3 +78,116 @@ lcd.createChar(0, Heart);
 lcd.setCursor(0, 1);
 lcd.write(0);
 ```
+
+# DFR0165 Mega IO Expansion Shield For Arduino Mega  
+![Mega IO](./img/2195ca01b10fdaa0ba12bcea21fd392c.png)
+
+## 产品参数
++ 兼容Arduino MEGA1280、Arduino MEGA2560、Arduino MEGA ADK、Google ADK  
++ 前半部分兼容Power shield、wifi shield、USB host shield、Motor shield等等  
++ 扩展40个数字 IO口（34个舵机接口）及电源  
++ 16个模拟IO口及电源  
++ 1个数字端口外接电源接线柱  
++ 1个数字端口外部供电和板载电源切换开关  
++ 1个ISP下载接口  
++ 3个串口外接接口  
++ 1个复位按钮  
++ 3个Xbee/Bluetooh Bee蓝牙无线数传接口  
++ 1个IIC/I2C/TWI接口  
++ 1个Micro SD卡插座  
++ 扩展面包孔若干  
++ 指示灯（PIN13）  
++ 平面尺寸：130x58mm  
+
+## 引脚说明
+![引脚说明](./img/MegaEXV2_Diag_cn.png)  
+<table>
+<thead>
+<tr>
+<th><strong>引脚</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>应用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D50</td>
+<td>MISO</td>
+<td>SPI接口</td>
+</tr>
+<tr>
+<td>D51</td>
+<td>MOSI</td>
+<td>SPI接口</td>
+</tr>
+<tr>
+<td>D52</td>
+<td>SCK</td>
+<td>SPI接口</td>
+</tr>
+<tr>
+<td>D53</td>
+<td>SS</td>
+<td>SPI接口</td>
+</tr>
+<tr>
+<td>D1</td>
+<td>TX0</td>
+<td>串口0</td>
+</tr>
+<tr>
+<td>D0</td>
+<td>RX0</td>
+<td>串口0</td>
+</tr>
+<tr>
+<td>D18</td>
+<td>TX1</td>
+<td>串口1</td>
+</tr>
+<tr>
+<td>D19</td>
+<td>RX1</td>
+<td>串口1</td>
+</tr>
+<tr>
+<td>D16</td>
+<td>TX2</td>
+<td>串口2</td>
+</tr>
+<tr>
+<td>D17</td>
+<td>RX2</td>
+<td>串口2</td>
+</tr>
+<tr>
+<td>D14</td>
+<td>TX3</td>
+<td>串口3</td>
+</tr>
+<tr>
+<td>D15</td>
+<td>RX3</td>
+<td>串口3</td>
+</tr>
+<tr>
+<td>D20</td>
+<td>SDA</td>
+<td>IIC接口</td>
+</tr>
+<tr>
+<td>D21</td>
+<td>SCL</td>
+<td>IIC接口</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>PG5_SS</td>
+<td>用SD卡时使用</td>
+</tr>
+<tr>
+<td>D13</td>
+<td>LED</td>
+<td>数字针脚</td>
+</tr>
+</tbody></table>
+
