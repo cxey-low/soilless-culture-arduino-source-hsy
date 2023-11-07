@@ -11,13 +11,21 @@ I2C device found at address 0x7C  !
 
 LiquidCrystal_I2C lcd(0x20, 16, 2);
 
+void clean()
+{
+    lcd.home();
+    lcd.print("              ");
+    lcd.setCursor(0,1);
+    lcd.print("              ");
+}
+
 void hello()
 {
-    lcd.clear();
-    lcd.setCursor(2, 0);
-    lcd.print("Hello world!");
-    lcd.setCursor(6, 1);
-    lcd.print("CXeY");
+    //clean();
+    lcd.setCursor(0, 0);
+    lcd.print("  Hello world!  ");
+    lcd.setCursor(0, 1);
+    lcd.print("      CXeY      ");
 }
 
 void setup()
@@ -26,6 +34,7 @@ void setup()
     lcd.init();
     lcd.backlight();
     lcd.home();
+    lcd.clear();
 
     hello();
 
@@ -46,10 +55,12 @@ void loop()
 
     if (digitalRead(tem_button))
     {
-        lcd.clear();
+        //clean();
         lcd.home();
-        lcd.print("Tem:");
-        lcd.setCursor(1, 1);
+        lcd.print("Tem:              ");
+        lcd.setCursor(5, 1);
+        lcd.print("          ");
+        lcd.setCursor(0,1);
         lcd.print((double)(analogRead(tem_sensor) * (5 / 10.24)));
     }else if (!(digitalRead(tem_button)))
     {
