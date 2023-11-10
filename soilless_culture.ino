@@ -1,43 +1,17 @@
 #include <LiquidCrystal_I2C.h>
 
-#define tem_led 14
-#define tem_button 15
-#define tem_sensor A11
+#define ROTATION A15
+#define anaRO map(analogRead(A15),0,1023,1,4)    
 
-/*
-I2C device found at address 0x20  !
-I2C device found at address 0x7C  !
-*/
+
+#define STEAM A10
+#define TEM A9
+#define LIGHT A8
+
+#define WAIT 1000
+
 
 LiquidCrystal_I2C lcd(0x20, 16, 2);
-
-byte cus[8] = {
-    0b00000,
-    0b01010,
-    0b11111,
-    0b11111,
-    0b01110,
-    0b00100,
-    0b00000,
-    0b00000};
-
-byte ctem[8] = {
-    0b11100,
-    0b10111,
-    0b11100,
-    0b01100,
-    0b01100,
-    0b01111,
-    0b00111,
-    0b00111};
-
-void clean()
-{
-    lcd.home();
-    lcd.print("              ");
-    lcd.setCursor(0, 1);
-    lcd.print("              ");
-}
 
 void hello()
 {
@@ -45,7 +19,6 @@ void hello()
     lcd.setCursor(0, 0);
     lcd.print("  Hello world!  ");
     lcd.setCursor(0, 1);
-    lcd.write(0);
     lcd.setCursor(1, 1);
     lcd.print("     CXeY      ");
 }
@@ -58,40 +31,78 @@ void setup()
     lcd.home();
     lcd.clear();
 
-    lcd.createChar(0, cus);
-    lcd.createChar(1,ctem);
-
     hello();
 
     // Serial
     Serial.begin(9600);
 
     // pinMode
-    pinMode(tem_led, OUTPUT);
-    pinMode(tem_button, INPUT_PULLUP);
-    pinMode(tem_sensor, INPUT);
+    pinMode(ROTATION, INPUT);
+
+    pinMode(TEM, INPUT);
+    pinMode(LIGHT, INPUT);
+    pinMode(STEAM, INPUT);
 }
 
 void loop()
 {
-    delay(1000);
-
-    digitalWrite(tem_led, digitalRead(tem_button));
-
-    if (digitalRead(tem_button))
+    if (Serial.available())
     {
-        // clean();
+        switch ((char) Serial.read())
+        {
+        case 'd':
+
+            Serial.println("ROTATION");
+            Serial.println(analogRead(ROTATION));
+            Serial.println("TEM");
+            Serial.println(analogRead(TEM));
+            Serial.println("LIGHT");
+            Serial.println(analogRead(LIGHT));
+            Serial.println("STEAM");
+            Serial.println(analogRead(STEAM));
+
+            break;
+        default:
+            break;
+        }
+    }
+
+    switch (anaRO)
+    {
+    case 1:
         lcd.home();
-        lcd.print("Tem:              ");
-        lcd.setCursor(5, 1);
-        lcd.print("          ");
-        lcd.setCursor(0, 1);
-        lcd.print((double)(analogRead(tem_sensor) * (5 / 10.24)));
+        lcd.print("STEAM         ");
+        lcd.setCursor(0,1);
+        lcd.print("           ");
+        lcd.setCursor(0,1);
+        lcd.print(analogRead(STEAM));
+        lcd.setCursor(5,1);
+        delay(WAIT);
+        break;
+    case 2:
+        lcd.home();
+        lcd.print("Tem           ");
+        lcd.setCursor(0,1);
+        lcd.print("           ");
+        lcd.setCursor(0,1);
+        lcd.print((double) analogRead(TEM)*(5/10.24));
         lcd.setCursor(6,1);
-        lcd.write(1);
+        delay(WAIT);
+        break;
+    case 3:
+        lcd.home();
+        lcd.print("LIGHT         ");
+        lcd.setCursor(0,1);
+        lcd.print("           ");
+        lcd.setCursor(0,1);
+        lcd.print(analogRead(LIGHT));
+        lcd.setCursor(5,1);
+        delay(WAIT);
+        break;
+    default:
+        break;
     }
-    else if (!(digitalRead(tem_button)))
-    {
-        hello();
-    }
+
+
+
 }
