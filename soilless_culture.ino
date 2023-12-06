@@ -1,5 +1,6 @@
 #include <LiquidCrystal_I2C.h>
 
+
 #define ROTATION A15
 #define anaRO map(analogRead(A15), 0, 1023, 1, 4)
 
@@ -8,6 +9,7 @@
 #define LIGHT A8
 
 #define WAIT 1000
+
 
 LiquidCrystal_I2C lcd(0x20, 16, 2);
 

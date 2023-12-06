@@ -194,3 +194,6 @@ lcd.write(0);
 
 # Micro SD  
 [Mirco SD](https://zhuanlan.zhihu.com/p/349832403)
+
+# Motor  
+[Motor](https://zhuanlan.zhihu.com/p/581614079?utm_id=0)  
