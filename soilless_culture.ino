@@ -1,17 +1,28 @@
 #include <LiquidCrystal_I2C.h>
 
 
-#define ROTATION A15
-#define anaRO map(analogRead(A15), 0, 1023, 1, 4)
+#define BUTTON 27
 
 #define STEAM A10
 #define TEM A9
 #define LIGHT A8
 
-#define WAIT 1000
-
+#define WAIT 500
 
 LiquidCrystal_I2C lcd(0x20, 16, 2);
+
+uint8_t sensorNum[3] = {A8, A9, A10};
+char sensor[3][6] = {"LIGHT", "TEM  ", "STEAM"};
+short sensorType = 0;
+
+
+void addCount(){
+    if ()
+    {
+        /* code */
+    }
+    
+}
 
 void hello()
 {

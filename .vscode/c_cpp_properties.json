@@ -19,7 +19,6 @@
                 "D:\\arduino-1.8.19-windows\\arduino-1.8.19\\hardware\\arduino\\avr\\variants\\mega",
                 "D:\\arduino-1.8.19-windows\\arduino-1.8.19\\libraries\\LiquidCrystal_I2C",
                 "D:\\arduino-1.8.19-windows\\arduino-1.8.19\\hardware\\arduino\\avr\\libraries\\Wire\\src",
-                "D:\\arduino-1.8.19-windows\\arduino-1.8.19\\libraries\\Servo\\src",
                 "d:\\arduino-1.8.19-windows\\arduino-1.8.19\\hardware\\tools\\avr\\lib\\gcc\\avr\\7.3.0\\include",
                 "d:\\arduino-1.8.19-windows\\arduino-1.8.19\\hardware\\tools\\avr\\lib\\gcc\\avr\\7.3.0\\include-fixed",
                 "d:\\arduino-1.8.19-windows\\arduino-1.8.19\\hardware\\tools\\avr\\avr\\include"
