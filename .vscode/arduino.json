@@ -2,5 +2,6 @@
     "configuration": "cpu=atmega2560",
     "board": "arduino:avr:mega",
     "port": "COM3",
-    "sketch": "soilless_culture.ino"
+    "sketch": "soilless_culture.ino",
+    "output": "../build"
 }

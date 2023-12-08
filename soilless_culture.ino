@@ -1,6 +1,5 @@
 #include <LiquidCrystal_I2C.h>
 
-
 #define BUTTON 27
 
 #define STEAM A10
@@ -11,28 +10,71 @@
 
 LiquidCrystal_I2C lcd(0x20, 16, 2);
 
-uint8_t sensorNum[3] = {A8, A9, A10};
-char sensor[3][6] = {"LIGHT", "TEM  ", "STEAM"};
+const int sensorNum[3] = {A8, A9, A10};
+const char sensor[3][6] = {"LIGHT", "TEM  ", "STEAM"};
 short sensorType = 0;
+unsigned long time = 0;
+unsigned long time2 = 0;
 
+short buttonPressed()
+{
 
-void addCount(){
-    if ()
+    if (digitalRead(BUTTON) == HIGH)
     {
-        /* code */
+        if (millis() - time > 500)
+        {
+            time = millis();
+            sensorType = (sensorType == 2) ? 0 : (sensorType + 1);
+            sensorSer();
+
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+}
+
+double sensorRead(uint8_t a)
+{
+    return (a == A9) ? (double)analogRead(A9) * (5 / 10.24) : analogRead(a);
+}
+
+void sensorSer()
+{
+    if (Serial.available())
+    {
+        for (short i = 0; i < 3; i += 1)
+        {
+            Serial.println(sensor[i]);
+            Serial.println(sensorRead(sensorNum[i]));
+        }
+    }
+}
+
+void sensorLcd()
+{
+    if (millis()-time2>500)
+    {
+        time2=millis();
+            lcd.setCursor(0, 0);
+    lcd.print(sensor[sensorType]);
+    lcd.setCursor(0, 1);
+    lcd.print("                 ");
+    lcd.setCursor(0, 1);
+    lcd.print(sensorRead(sensorNum[sensorType]));
+    lcd.setCursor(0, 0);
+    lcd.print(sensor[sensorType]);
+    lcd.setCursor(0, 1);
+    lcd.print("                 ");
+    lcd.setCursor(0, 1);
+    lcd.print(sensorRead(sensorNum[sensorType]));
+
     }
     
 }
 
-void hello()
-{
-    // clean();
-    lcd.setCursor(0, 0);
-    lcd.print("  Hellooworld!  ");
-    lcd.setCursor(0, 1);
-    lcd.setCursor(1, 1);
-    lcd.print("     CXeY      ");
-}
 
 void setup()
 {
@@ -42,13 +84,11 @@ void setup()
     lcd.home();
     lcd.clear();
 
-    hello();
 
     // Serial
     Serial.begin(9600);
 
     // pinMode
-    pinMode(ROTATION, INPUT);
 
     pinMode(TEM, INPUT);
     pinMode(LIGHT, INPUT);
@@ -57,60 +97,7 @@ void setup()
 
 void loop()
 {
-    if (Serial.available())
-    {
-        switch ((char)Serial.read())
-        {
-        case 'd':
+    buttonPressed();
 
-            Serial.println("ROTATION");
-            Serial.println(analogRead(ROTATION));
-            Serial.println("TEM");
-            Serial.println(analogRead(TEM));
-            Serial.println("LIGHT");
-            Serial.println(analogRead(LIGHT));
-            Serial.println("STEAM1");
-            Serial.println(analogRead(STEAM));
-
-            break;
-        default:
-            break;
-        }
-    }
-
-    switch (anaRO)
-    {
-    case 1:
-        lcd.home();
-        lcd.print("STEAM         ");
-        lcd.setCursor(0, 1);
-        lcd.print("           ");
-        lcd.setCursor(0, 1);
-        lcd.print(analogRead(STEAM));
-        lcd.setCursor(5, 1);
-        delay(WAIT);
-        break;
-    case 2:
-        lcd.home();
-        lcd.print("Tem           ");
-        lcd.setCursor(0, 1);
-        lcd.print("           ");
-        lcd.setCursor(0, 1);
-        lcd.print((double)analogRead(TEM) * (5 / 10.24));
-        lcd.setCursor(6, 1);
-        delay(WAIT);
-        break;
-    case 3:
-        lcd.home();
-        lcd.print("LIGHT         ");
-        lcd.setCursor(0, 1);
-        lcd.print("           ");
-        lcd.setCursor(0, 1);
-        lcd.print(analogRead(LIGHT));
-        lcd.setCursor(5, 1);
-        delay(WAIT);
-        break;
-    default:
-        break;
-    }
+    sensorLcd();
 }
